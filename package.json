@@ -1,0 +1,28 @@
+{
+  "name": "electron-quick-start",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build-all": "electron-packager . DOCxML --all --electron-version=1.8.4 --out=./new-builds --overwrite"
+  },
+  "repository": "https://github.com/lectron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^1.8.4",
+    "electron-packager": "^12.1.0",
+    "electron-winstaller": "^2.6.4"
+  },
+  "dependencies": {
+    "mammoth": "^1.4.6"
+  }
+}

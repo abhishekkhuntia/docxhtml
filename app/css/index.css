@@ -1,0 +1,63 @@
+html,
+body{
+    -webkit-app-region: drag;
+    background: #052d41;
+    color: #fff;
+    font-weight: 300;
+    margin: 0px;
+    font-weight: 300;
+    font-family: sans-serif;
+}
+*{
+    box-sizing: border-box;
+    
+}
+#loader{
+    visibility: hidden;
+    margin: 0px;
+}
+h1{
+    font-weight: 300;
+}
+.main-content{
+    padding: 20px;
+    text-align: center;
+}
+.header-h1{
+    background: #fff;
+    color: #052d41;
+    margin: 0px;
+    padding: 20px;
+}
+input[type="text"]{
+    padding: 10px;
+    margin: 10px;
+}
+.round-btn{
+    background: #f90;
+    font-size: 1em;
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+.editable, .button-sound, .close-window{
+    -webkit-app-region: no-drag;
+    padding: 10px;
+}
+.textarea{
+    margin: 10px;
+    width: auto;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+}
+
+#dnd{
+    width: 200px;
+    height: 200px;
+    background: #f90;
+}
+.drag-enter{
+    background: #f0f0f0;
+}

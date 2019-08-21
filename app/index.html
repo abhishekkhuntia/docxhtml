@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>DOCxML</title>
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body>
+    <h1 class="header-h1">DOC<span style="color: #f90;">xML</span></h1>
+    <div class="main-content">
+      <p>DOCX to HTML converter</p>
+      <!-- <button class="close-window">X</button> -->
+      <!-- <div class="inputDiv">
+        <input type="text" class="editable" name="task-name" placeholder="Enter task name" />
+        <button class="addBtn editable">Add</button>
+      </div>
+      <ul class="actionList">
+      </ul>     -->
+      <p id="loader">Processing ...</p>
+      <input type="text" placeholder="Enter Document Title" id="docTitle" />
+      <button class="round-btn" id="selectFileName"> Select File</button>
+    </div>
+    <script>
+      // You can also require other files to run in this process
+      require('../renderer.js')
+    </script>
+    <script src="js/index.js"></script>
+    <script src="js/actions.js"></script>
+    <script type="text/x-ph-tmpl" id="template-script">
+      <!DOCTYPE html>
+      <html>
+      <head>
+          <meta charset="utf-8" />
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <title></title>
+          <style type="text/css">
+            body{
+              font-family: sans-serif;
+              margin: 0px;
+            }
+            table td{
+              border: 1px solid #ddd;
+            }
+            p a[href^="#"]{
+              text-decoration: none;
+              padding: 10px;
+              border: 1px dashed #ddd;
+              color: #052d41;
+              transition: 0.2s;
+            }
+            p a[href^="#"]:hover{
+              color: #f90;
+            }
+            h1{
+              font-weight: 300;
+              color: #f90;
+              margin: 0px;
+            }
+            .header{
+              text-align: center;
+              border-bottom: 1px solid #ddd;
+              padding: 10px;
+            }
+            .header h1{
+              font-size: 40px;
+            }
+            #searchBox{
+              border: 1px solid #f90;
+              font-size: 21px;
+              line-height: 40px;
+              padding: 0 25px;
+              font-weight: 300;
+            }
+            section[content]{
+              width: 70%;
+              margin: 0 auto;
+              box-shadow: 0px 12px 22px #ccc;
+              padding: 10px;
+            }
+            section[content] img{
+              max-width: 100%;
+              box-shadow: 4px 9px 7px #ddd
+            }
+            .search-result{
+              width: 310px;
+              margin: 0 auto;
+              text-align: left;
+              list-style: none;
+              padding: 0px;
+              position: absolute;
+              background: white;
+              max-height: 300px;
+              overflow: auto;
+            }
+            .search-result li {
+              border-bottom: 1px solid #ddd;
+              border-left: 1px solid #ddd;
+              border-right: 1px solid #ddd;
+              margin-bottom: 5px;
+              padding: 5px;
+            }
+            .search-result li a{
+              color: #484848;
+              text-decoration: none;
+              transition: 0.2s;
+            }
+            .search-result li a:hover{
+              color: #f90;
+            }
+            .header-block{
+              width: max-content;
+              margin: 0 auto;
+            }
+          </style>
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+      </head>
+      <body onload="startApp()">
+          <header>
+            <div class="header">
+              <div class="header-block">
+                <h1 id="titleBlock"></h1>
+                <input type="text" id="searchBox" placeholder="Search Content" />
+                <ul class="search-result">
+                </ul>
+              </div>
+            </div>
+          </header>
+          <section content>
+          </section>
+      </body>
+      </html>
+    </script>
+    <script type="text/x-ph-tmpl" id="template-JS-script">
+      var allLinks = [];
+            function startApp(){
+              var _s = document.getElementById('searchBox');
+              if(_s){
+                allLinks = generateAnchorMap();
+                _s.addEventListener('keyup', function(e){
+                  var filterVal = e.target.value;
+                  var searchResult = '';
+                  var searchList = document.querySelector('.search-result');
+                  if(filterVal && filterVal.length){
+                    var filteredMap = allLinks.filter(item => {
+                      return item.display && item.display.toLowerCase().indexOf(filterVal.toLowerCase()) != -1; 
+                    });
+                    searchResult = generateSearchResult(filteredMap);
+                    searchList.style.visibility = 'visible';
+                  } else{
+                    searchResult = generateSearchResult();
+                    searchList.style.visibility = 'hidden';
+                  }
+                    searchList.innerHTML = searchResult;
+                });
+
+              } else {
+                console.log("Not found");
+              }
+            }
+            
+            function generateAnchorMap(){
+              var _all_links = document.querySelectorAll('a[href]');
+              var op = [];
+              if(_all_links && _all_links.length){
+                for(var i =0; i< _all_links.length; i++){
+                  var map = {
+                    display: _all_links[i].innerText,
+                    href: _all_links[i].href
+                  }
+                  op.push(map);
+                }
+              }
+              return op;
+            }
+            function generateSearchResult(linkArray){
+              var op = '';
+              if(linkArray && linkArray.length){
+                for(var j =0; j < linkArray.length; j++){
+                  op += '<li><a href="'+linkArray[j].href+'" >' + linkArray[j].display + '</a></li>';
+                }
+              }
+              return op;
+            }
+    </script>
+  </body>
+</html>
